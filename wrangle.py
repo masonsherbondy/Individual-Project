@@ -182,6 +182,7 @@ def handle_nulls(df, cr, rr):
 
 #reference for splitting data in a classification setting
 def class_split_data(df, target):
+
     '''
     Takes in a dataset and returns the train, validate, and test subset dataframes.
     Dataframe size for my test set is .2 or 20% of the original data. 
@@ -189,6 +190,7 @@ def class_split_data(df, target):
     Training data is 56% of the original data. 
     This function stratifies by the target variable.
     '''
+
     #import splitter
     from sklearn.model_selection import train_test_split
     
@@ -203,6 +205,7 @@ def class_split_data(df, target):
 
 
 def remove_outliers(df, k, col_list):
+    
     ''' 
     Removes outliers from a list of columns in a dataframe and returns the dataframe.
     '''
