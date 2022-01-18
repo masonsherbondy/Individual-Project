@@ -9,6 +9,8 @@ The goal of this project is to develop a machine learning model to use on fictio
 ## Project Description
 IBM has created a fictional data set based on an employee survey. Employee attrition brings about costs such as business disruption, hiring and training new staff. Exploring this data and testing my models here will give me better insights on how to run through a data set in order to classify records and on what IBM is looking at when considering the flight risk of an employee.
 
+## Project Summary
+
 ## The Plan
 
 ### Wrangle the data
@@ -28,4 +30,7 @@ IBM has created a fictional data set based on an employee survey. Employee attri
 * Run best model on test set 
 
 ### Deliver
+Set up repository for readability, including a final notebook to report findings and this README for clarity. Compose project summary and writeup.
+
+## Conclusion
 

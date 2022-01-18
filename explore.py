@@ -12,8 +12,35 @@ from scipy.stats import pearsonr, spearmanr
 
 sns.set()
 
+
+
+def plot_distributions(df, quant_vars):
+
+    '''
+    This function accepts a dataframe and a list of features, and it plots histograms and boxplots for each feature.
+    '''
+    for cat in quant_vars:
+        df[cat].hist(color = 'indigo')
+        plt.title(cat, pad = 11)
+        plt.xlabel(cat)
+        plt.ylabel('Frequency')
+        plt.grid(True)
+        plt.show();
+        plt.boxplot(df[cat])
+        plt.title(cat, pad = 11)
+        plt.ylabel(cat)
+        plt.grid(True)
+        plt.show()
+        plt.tight_layout
+
+
+
 #plot_categorical_and_continuous defines 3 parameters, a dataframe to pull data from, and x variable (categorical column) and a y variable (continuous value column), and returns visualizations of these relationships.
 def plot_categorical_and_continuous(df, x, y):
+
+    '''
+    This function shows the relationship between two variables (a categorical feature and a continuous one) on 3 different kind of plots (box, strip, violin)
+    '''
 
     #plot 3 figures and 3 different plots for visualizing categorical-continuous relationships
     plt.figure(figsize = (8, 5))
@@ -26,6 +53,12 @@ def plot_categorical_and_continuous(df, x, y):
 
 
 def plot_variable_pairs(df, quant_vars):
+    
+    '''
+    This function enumerates the number of features passed in a list, forms all possible pairs for the number of features it selects,
+    and runs a pearson's correlation test on each pair, and then plots the relationship between each pair as well as a regression line, and titles
+    each plot with Pearson's R and the respective p-value. This function currently accepts up to 11 features for pairing.
+    '''
 
     #determine k
     k = len(quant_vars)
@@ -1224,3 +1257,65 @@ def return_chi2(observed):
     print(f'chi^2 = {chi2:.4f}')
     print(f'p = {p:.4f}')
 
+
+
+
+
+### /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ FEATURE SELECTION FUNCTIONS HERE /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ ###
+
+
+
+### Note: must define X_train and y_train prior to running feature selection functions
+## note: also these lists are ordered backward
+
+#X_train = predictors or features (same thing if you got the right features)
+#y_train = target
+#k = number of features you want
+
+#select_kbest defines 3 parameters, X_train (predictors), y_train (target variable) and k (number of features to spit), and returns a list of the best features my man
+def select_kbest(X_train, y_train, k):
+
+    #import feature selection tools
+    from sklearn.feature_selection import SelectKBest, f_regression
+
+    #create the selector
+    f_select = SelectKBest(f_regression, k = k)
+
+    #fit the selector
+    f_select.fit(X_train, y_train)
+
+    #create a boolean mask to show if feature was selected
+    feat_mask = f_select.get_support()
+    
+    #create a list of the best features
+    best_features = X_train.iloc[:,feat_mask].columns.to_list()
+
+    #gimme gimme
+    return best_features
+
+
+
+#rfe defines 3 parameters, X_train (features), y_train (target variable) and k (number of features to bop), and returns a list of the best boppits m8
+def rfe(X_train, y_train, k):
+
+    #import feature selection tools
+    from sklearn.feature_selection import RFE
+    from sklearn.linear_model import LinearRegression
+
+    #crank it
+    lm = LinearRegression()
+
+    #pop it
+    rfe = RFE(lm, k)
+    
+    #bop it
+    rfe.fit(X_train, y_train)  
+    
+    #twist it
+    feat_mask = rfe.support_
+    
+    #pull it 
+    best_rfe = X_train.iloc[:,feat_mask].columns.tolist()
+    
+    #bop it
+    return best_rfe
