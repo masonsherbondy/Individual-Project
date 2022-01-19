@@ -247,12 +247,9 @@ def prepare_attrition():
     df = acquire_attrition()
 
     #set up if-conditional to see if there is a .csv available
-    if os.path.isfile('attrition_IBM.csv'):
+    if os.path.isfile('net_attrition.csv'):
 
-        #if there is, read the .csv into a dataframe
-        cf = pd.read_csv('attrition_IBM.csv', index_col = 0)
-
-        #and this .csv, as well
+        #if there is, read .csv into df
         df = pd.read_csv('net_attrition.csv', index_col = 0)
 
     #otherwise...
@@ -395,25 +392,18 @@ def prepare_attrition():
         #drop extra column
         dummies = dummies.drop(columns = 'male')
 
-        #concatenate dummy df with OG df and new cf
+        #concatenate dummy df with OG df
         df = pd.concat([df, dummies], axis = 1)
-        cf = pd.concat([df, dummies], axis = 1)
-
-        #drop redundant columns on cf
-        cf = cf.drop(columns = categorical)
 
         #make new feature 'age' out of index. reset index to 'employee_id'
-        cf['age'] = cf.index
-        cf = cf.set_index('employee_id')
         df['age'] = df.index
         df = df.set_index('employee_id')
 
-        #write dfs into .csv files for later ease of access
-        cf.to_csv('attrition_IBM.csv')
+        #write df into .csv for later ease of access
         df.to_csv('net_attrition.csv')
 
     #split the data
-    train, validate, test = class_split_data(cf, 'attrition')
+    train, validate, test = class_split_data(df, 'attrition')
 
     #return gross dataframe and modeling sets
     return df, train, validate, test
