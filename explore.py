@@ -19,6 +19,7 @@ def plot_distributions(df, quant_vars):
     '''
     This function accepts a dataframe and a list of features, and it plots histograms and boxplots for each feature.
     '''
+
     for cat in quant_vars:
         df[cat].hist(color = 'indigo')
         plt.title(cat, pad = 11)
@@ -26,12 +27,24 @@ def plot_distributions(df, quant_vars):
         plt.ylabel('Frequency')
         plt.grid(True)
         plt.show();
-        plt.boxplot(df[cat])
-        plt.title(cat, pad = 11)
-        plt.ylabel(cat)
-        plt.grid(True)
-        plt.show()
-        plt.tight_layout()
+
+
+def distributions_plot(df, quant_vars):
+
+    plt.figure(figsize = (20, 11))   # create figure
+
+    for i, cat in enumerate(quant_vars):    # loop through enumerated list
+    
+        plot_number = i + 1     # i starts at 0, but plot nos should start at 1
+        
+        plt.subplot(5, 5, plot_number)  # create subplot
+        
+        plt.title(cat)  # title
+        
+        df[cat].hist(color = 'indigo', edgecolor='black')   # display histogram for column
+
+        plt.tight_layout(); # clean
+    
 
 
 
