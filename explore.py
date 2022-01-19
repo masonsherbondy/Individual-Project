@@ -31,7 +31,7 @@ def plot_distributions(df, quant_vars):
         plt.ylabel(cat)
         plt.grid(True)
         plt.show()
-        plt.tight_layout
+        plt.tight_layout()
 
 
 
@@ -1266,7 +1266,7 @@ def return_chi2(observed):
 
 
 ### Note: must define X_train and y_train prior to running feature selection functions
-## note: also these lists are ordered backward
+## note: also these output lists are ordered backward
 
 #X_train = predictors or features (same thing if you got the right features)
 #y_train = target

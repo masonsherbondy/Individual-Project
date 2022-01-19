@@ -30,7 +30,7 @@ IBM has created a fictional data set based on an employee survey. Employee attri
 * Run best model on test set 
 
 ### Deliver
-Set up repository for readability, including a final notebook to report findings and this README for clarity. Compose project summary and writeup.
+Set up repository for readability, including a final notebook to report findings and this README for clarity. Compose project summary and writeup. Push all final commits.
 
 ## Conclusion
 
