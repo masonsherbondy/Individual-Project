@@ -1242,7 +1242,7 @@ def plot_variable_pairs(df, quant_vars):
         sns.lmplot(x = quant_vars[9], y = quant_vars[10], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr55, 3)} | P-value: {round(p55, 4)} \n -----------------');
 
-if k == 12:
+    if k == 12:
 
         #determine correlation coefficients
         corr1, p1 = stats.pearsonr(df[quant_vars[1]], df[quant_vars[0]])
@@ -1583,7 +1583,7 @@ if k == 12:
         plt.title(f'R-value: {round(corr66, 3)} | P-value: {round(p66, 4)} \n -----------------');
 
 
-if k == 13:
+    if k == 13:
 
         #determine correlation coefficients
         corr1, p1 = stats.pearsonr(df[quant_vars[1]], df[quant_vars[0]])
@@ -2978,7 +2978,7 @@ if k == 13:
         plt.title(f'R-value: {round(corr105, 3)} | P-value: {round(p105, 4)} \n -----------------');
 
 
-if k == 16:
+    if k == 16:
 
         #determine correlation coefficients
         corr1, p1 = stats.pearsonr(df[quant_vars[1]], df[quant_vars[0]])
@@ -7885,7 +7885,7 @@ if k == 16:
 
         #plot CCII
         sns.lmplot(x = quant_vars[11], y = quant_vars[20], data = df, line_kws = {'color': 'purple'})
-        plt.title(f'R-value: {round(corr202, 3)} | P-value: {round(p202 4)} \n -----------------');
+        plt.title(f'R-value: {round(corr202, 3)} | P-value: {round(p202, 4)} \n -----------------');
 
         #plot CCIII
         sns.lmplot(x = quant_vars[12], y = quant_vars[20], data = df, line_kws = {'color': 'purple'})
@@ -7919,7 +7919,7 @@ if k == 16:
         sns.lmplot(x = quant_vars[19], y = quant_vars[20], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr210, 3)} | P-value: {round(p210, 4)} \n -----------------');
 
-      if k == 22:
+    if k == 22:
 
         #determine correlation coefficients
         corr1, p1 = stats.pearsonr(df[quant_vars[1]], df[quant_vars[0]])
@@ -8962,7 +8962,7 @@ if k == 16:
 
         #plot CCII
         sns.lmplot(x = quant_vars[11], y = quant_vars[20], data = df, line_kws = {'color': 'purple'})
-        plt.title(f'R-value: {round(corr202, 3)} | P-value: {round(p202 4)} \n -----------------');
+        plt.title(f'R-value: {round(corr202, 3)} | P-value: {round(p202, 4)} \n -----------------');
 
         #plot CCIII
         sns.lmplot(x = quant_vars[12], y = quant_vars[20], data = df, line_kws = {'color': 'purple'})
