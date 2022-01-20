@@ -373,7 +373,6 @@ def prepare_attrition():
         str.replace('non-travel', 'travel_none').\
         str.replace('development', 'dev_dept').\
         str.replace('sales', 'sales_dept').\
-        str.replace('human_resources', 'hr_ed', 1).\
         str.replace('life_sciences', 'life_sciences_ed').\
         str.replace('marketing', 'marketing_ed').\
         str.replace('medical', 'medical_ed').\
@@ -392,7 +391,7 @@ def prepare_attrition():
         #drop extra column
         dummies = dummies.drop(columns = 'male')
 
-        #concatenate dummy df with OG df
+        #concatenate dummy df with original df
         df = pd.concat([df, dummies], axis = 1)
 
         #make new feature 'age' out of index. reset index to 'employee_id'
