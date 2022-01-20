@@ -14,22 +14,13 @@ sns.set()
 
 
 
-def plot_distributions(df, quant_vars):
-
-    '''
-    This function accepts a dataframe and a list of features, and it plots histograms and boxplots for each feature.
-    '''
-
-    for cat in quant_vars:
-        df[cat].hist(color = 'indigo')
-        plt.title(cat, pad = 11)
-        plt.xlabel(cat)
-        plt.ylabel('Frequency')
-        plt.grid(True)
-        plt.show();
-
-
+#Thank you, Adam Gomez
 def distributions_plot(df, quant_vars):
+
+    '''
+    This function creates a nice sized figure, enumerates the list of features passed into the function, creates a grid of subplots,
+    and then charts histograms for features in the list onto the subplots.
+    '''
 
     plt.figure(figsize = (20, 11))   # create figure
 
@@ -46,13 +37,38 @@ def distributions_plot(df, quant_vars):
         plt.tight_layout(); # clean
     
 
+def boxplot_grid(df, quant_vars):
+
+    '''
+    This function creates a nice sized figure, enumerates the list of features passed into the function, creates a grid of subplots,
+    and then charts histograms for features in the list onto the subplots.
+    '''
+    
+    plt.figure(figsize = (28, 16))   # create figure
+    
+    for i, cat in enumerate(quant_vars):    # loop through enumerated list
+    
+        plot_number = i + 1     # i starts at 0, but plot nos should start at 1
+        
+        plt.subplot(5, 5, plot_number)  # create subplot
+        
+        plt.boxplot(df[cat])   # display boxplot for column
+         
+        plt.ylabel(cat, size = 18)     # label y-axis
+
+        plt.yticks(size = 16)
+
+        plt.grid(True)      # show gridlines
+
+        plt.tight_layout(); # clean
+
 
 
 #plot_categorical_and_continuous defines 3 parameters, a dataframe to pull data from, and x variable (categorical column) and a y variable (continuous value column), and returns visualizations of these relationships.
 def plot_categorical_and_continuous(df, x, y):
 
     '''
-    This function shows the relationship between two variables (a categorical feature and a continuous one) on 3 different kind of plots (box, strip, violin)
+    This function shows the relationship between two variables (a categorical feature and a continuous one) on 3 different kind of plots (box, strip, violin).
     '''
 
     #plot 3 figures and 3 different plots for visualizing categorical-continuous relationships
@@ -68,9 +84,9 @@ def plot_categorical_and_continuous(df, x, y):
 def plot_variable_pairs(df, quant_vars):
     
     '''
-    This function enumerates the number of features passed in a list, forms all possible pairs for the number of features it selects,
+    This function counts the number of features passed in a list, forms all possible pairs for the number of features it selects,
     and runs a pearson's correlation test on each pair, and then plots the relationship between each pair as well as a regression line, and titles
-    each plot with Pearson's R and the respective p-value. This function currently accepts up to 11 features for pairing.
+    each plot with Pearson's R and the respective p-value. This function currently accepts up to 22 features for pairing.
     '''
 
     #determine k
@@ -8995,8 +9011,6 @@ def plot_variable_pairs(df, quant_vars):
         #plot CCX
         sns.lmplot(x = quant_vars[19], y = quant_vars[20], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr210, 3)} | P-value: {round(p210, 4)} \n -----------------');
-
-
 
         #plot CCXI
         sns.lmplot(x = quant_vars[0], y = quant_vars[21], data = df, line_kws = {'color': 'purple'})
