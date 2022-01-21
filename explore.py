@@ -41,14 +41,14 @@ def boxplot_grid(df, quant_vars):
 
     '''
     This function creates a nice sized figure, enumerates the list of features passed into the function, creates a grid of subplots,
-    and then charts histograms for features in the list onto the subplots.
+    and then charts boxplots for features in the list onto the subplots.
     '''
     
     plt.figure(figsize = (28, 16))   # create figure
     
     for i, cat in enumerate(quant_vars):    # loop through enumerated list
     
-        plot_number = i + 1     # i starts at 0, but plot nos should start at 1
+        plot_number = i + 1     # set plot_number to index + 1
         
         plt.subplot(5, 5, plot_number)  # create subplot
         
@@ -63,7 +63,7 @@ def boxplot_grid(df, quant_vars):
         plt.tight_layout(); # clean
 
 #visualize distribution of target variable across different departments
-def juxtapose_distributions(C1, C2, C3, target):
+def juxtapose_target(C1, C2, C3, target):
 
     '''
     This function creats a figure and plots the histograms of the target variable across 3 subset dataframes
