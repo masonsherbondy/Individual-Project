@@ -12,10 +12,25 @@ from scipy.stats import pearsonr, spearmanr
 
 sns.set()
 
-
+#distribution defines two parameters, a dataframe and feature to accept, and plots a histogram with chart mods for clarity
+def distribution(df, feature):
+    
+    plt.figure(figsize = (7, 4))    # create figure
+    
+    df[feature].hist(color = 'indigo')    # plot histogram of feature
+    
+    plt.tight_layout()    # clear it up
+    
+    plt.xticks(rotation = 45, size = 11)    # rotate x-axis label ticks 45 degrees, increase size to 11
+    
+    plt.yticks(size = 13)    # increasee y-axis label ticks to size 13
+    
+    f_feature = feature.replace('_', ' ').capitalize()    # re-format string for title
+    
+    plt.title(f'Distribution of {f_feature}', size = 13)    # title
 
 #Thank you, Adam Gomez
-def distributions_plot(df, quant_vars):
+def distributions_grid(df, quant_vars):
 
     '''
     This function creates a nice sized figure, enumerates the list of features passed into the function, creates a grid of subplots,
@@ -61,6 +76,7 @@ def boxplot_grid(df, quant_vars):
         plt.grid(True)      # show gridlines
 
         plt.tight_layout(); # clean
+
 
 #visualize distribution of target variable across different departments
 def juxtapose_target(C1, C2, C3, target):
