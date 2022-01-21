@@ -232,7 +232,7 @@ def acquire_attrition():
     This function acquires my IBM data by reading a downloadable .xls file, which is also conveniently in csv format.
     '''
 
-    df = pd.read_csv('employee_attrition.xls', index_col = 0)
+    df = pd.read_csv('employee_attrition.xls')
 
     return df
 
@@ -314,7 +314,8 @@ def prepare_attrition():
                 ]
 
         #set a list of numeric columns
-        numeric = ['daily_rate',
+        numeric = ['age',
+                'daily_rate',
                 'distance_from_home',
                 'education',
                 'environment_satisfaction',
@@ -394,8 +395,7 @@ def prepare_attrition():
         #concatenate dummy df with original df
         df = pd.concat([df, dummies], axis = 1)
 
-        #make new feature 'age' out of index. reset index to 'employee_id'
-        df['age'] = df.index
+        #reset index to 'employee_id'
         df = df.set_index('employee_id')
 
         #write df into .csv for later ease of access

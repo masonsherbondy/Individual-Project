@@ -65,16 +65,21 @@ def boxplot_grid(df, quant_vars):
 #visualize distribution of target variable across different departments
 def juxtapose_distributions(C1, C2, C3, target):
 
+    '''
+    This function creats a figure and plots the histograms of the target variable across 3 subset dataframes
+    This function currently works with the IBM attrition dataset.
+    '''
+
     plt.figure(figsize = (8, 5))
 
     plt.hist([C1[target], C2[target], C3[target]],
             label = ['R&D', 'Sales', 'HR'],
-            color = ['red', 'black', 'cornflowerblue'],
+            color = ['firebrick', 'black', 'cornflowerblue'],
             bins = 2, 
             lw = .5
             )
     plt.legend()
-    #plt.title('', size = 16, pad = 6)
+    plt.title('Attrition Proportionately Similar Across Departments', size = 16, pad = 6)
     plt.xlabel(target, size = 13)
     plt.ylabel('Frequency', size = 13);
 
@@ -10394,7 +10399,7 @@ def plot_variable_pairs(df, quant_vars):
         
 
 
-#<^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^> CUSTOMIZED RETURNS ON STATS TESTS FOUND HERE <^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^>#
+# <^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^> CUSTOMIZED RETURNS ON STATS TESTS FOUND HERE <^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^> #
 
 
 
@@ -10409,19 +10414,17 @@ def return_chi2(observed):
     print('Observed')
     print('--------')
     print(observed.values)
-    print('===================')
+    print('=====================')
     print('Expected')
     print('--------')
     print(expected.astype(int))
-    print('===================')
+    print('=====================')
     print(f'Degrees of Freedom: {degf}')
-    print('===================')
+    print('=====================')
     print('Chi^2 and P')
     print('-----------')
     print(f'chi^2 = {chi2:.4f}')
     print(f'p = {p:.4f}')
-
-
 
 
 
