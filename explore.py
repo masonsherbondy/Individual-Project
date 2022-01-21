@@ -75,7 +75,7 @@ def boxplot_grid(df, quant_vars):
 
         plt.grid(True)      # show gridlines
 
-        plt.tight_layout(); # clean
+        plt.tight_layout();    # clean
 
 
 #visualize distribution of target variable across different departments
