@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 from scipy import stats
+from varname import nameof
 
 from sklearn.model_selection import train_test_split
 from scipy.stats import pearsonr, spearmanr
@@ -82,7 +83,7 @@ def boxplot_grid(df, quant_vars):
 def juxtapose_target(C1, C2, C3, target):
 
     '''
-    This function creats a figure and plots the histograms of the target variable across 3 subset dataframes
+    This function creates a figure and plots the histograms of the target variable across 3 subset dataframes
     This function currently works with the IBM attrition dataset.
     '''
 
@@ -99,6 +100,32 @@ def juxtapose_target(C1, C2, C3, target):
     plt.xlabel(target, size = 13)
     plt.ylabel('Frequency', size = 13);
 
+#juxtapose_distributions defines 4 parameters, 3 dataframes and a shared feature to plot, and plots 3 distributions side-by-side
+def juxtapose_distributions(C1, C2, C3, feature):
+
+    '''
+    This function creates a figure and plots the histograms of the specified variable across 3 subset dataframes
+    '''
+
+    plt.figure(figsize = (8, 5))    # create figure
+
+    f_string = feature.replace('_', ' ').capitalize()
+
+    plt.hist([C1[feature], C2[feature], C3[feature]],      # plot histograms side-by-side
+            label = [nameof(C1), nameof(C2), nameof(C3)],     # label each distribution
+            color = ['indigo', 'mediumvioletred', 'hotpink']    # assign color to each distribution
+            )
+
+    plt.legend()    # show labels
+    plt.title(f'Distribution of {f_string}', size = 16, pad = 6)    # title grid
+    plt.xlabel(f_feature, size = 13)      # label x-axis
+    plt.ylabel('Frequency', size = 13);     # label y-axis
+
+def compare_attrition_rates(df, x):
+    sns.barplot(x = x, y = 'attrition', data = df)    # compare attrition rates across category
+    plt.axhline(df.attrition.mean(), label = 'Overall Attrition Rate')    # show overall attrition rate
+    plt.legend()    # label horizontal plot line
+    plt.grid(False)    # good-bye, gridlines
 
 #plot_categorical_and_continuous defines 3 parameters, a dataframe to pull data from, and x variable (categorical column) and a y variable (continuous value column), and returns visualizations of these relationships.
 def plot_categorical_and_continuous(df, x, y):
