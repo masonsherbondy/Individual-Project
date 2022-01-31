@@ -15,6 +15,10 @@ sns.set()
 
 #distribution defines two parameters, a dataframe and feature to accept, and plots a histogram with chart mods for clarity
 def distribution(df, feature):
+
+    '''
+    This function plots a histogram from specified df for specified feature.
+    '''
     
     plt.figure(figsize = (7, 4))    # create figure
     
@@ -29,6 +33,28 @@ def distribution(df, feature):
     f_feature = feature.replace('_', ' ').capitalize()    # re-format string for title
     
     plt.title(f'Distribution of {f_feature}', size = 13)    # title
+
+def distribution_dos(df1, df2, feature):
+
+    '''
+    This function takes in 3 parameters, two dataframes (df1 & df2) that represent two independent sub-populations, and a feature to compare
+    their respective distributions of side by side. It then plots the distributions as planned. Currently outfitted for the IBM Attrition data set.
+    '''
+
+    plt.figure(figsize = (8, 5))     # create figure
+
+    plt.hist([df1[feature], df2[feature]],      # plot distributions side by side
+            label = ['Departed', 'Retained'],
+            color = ['indigo', 'mediumvioletred']
+            )
+
+    plt.legend()    # include legend
+
+    f_feature = feature.replace('_', ' ').capitalize()    # re-format string
+
+    plt.xlabel(f_feature, size = 13)     # x-axis label 
+
+    plt.ylabel('Frequency', size = 13);     # y-axis label
 
 #Thank you, Adam Gomez
 def distributions_grid(df, quant_vars):
@@ -91,7 +117,7 @@ def juxtapose_target(C1, C2, C3, target):
 
     plt.hist([C1[target], C2[target], C3[target]],
             label = ['R&D', 'Sales', 'HR'],
-            color = ['firebrick', 'black', 'cornflowerblue'],
+            color = ['deeppink', 'mediumvioletred', 'darkorchid'],
             bins = 2, 
             lw = .5
             )
@@ -122,10 +148,37 @@ def juxtapose_distributions(C1, C2, C3, feature):
     plt.ylabel('Frequency', size = 13);     # label y-axis
 
 def compare_attrition_rates(df, x):
-    sns.barplot(x = x, y = 'attrition', data = df)    # compare attrition rates across category
+
+    '''
+    This function compares employee attrition rates (IBM DATA) from specified df across a categorical variable x.
+    '''
+
+    sns.barplot(x = x, y = 'attrition', data = df, palette = 'PuRd')    # compare attrition rates across category x
+    
     plt.axhline(df.attrition.mean(), label = 'Overall Attrition Rate')    # show overall attrition rate
-    plt.legend()    # label horizontal plot line
+    
+    plt.legend()    # label horizontal plot line as overall attrition rate 
+    
     plt.grid(False)    # good-bye, gridlines
+
+
+def supersize_attrition_rates(df, x):
+
+    '''
+    This function compares employee attrition rates (IBM DATA) from specified df across a categorical variable x on a larger figure.
+    '''
+    plt.figure(figsize = (13, 7))    # create figure
+
+    sns.barplot(x = x, y = 'attrition', data = df, palette = 'PuRd')    # compare attrition rates across category x
+    
+    plt.axhline(df.attrition.mean(), label = 'Overall Attrition Rate')    # show overall attrition rate
+    
+    plt.legend()    # label horizontal plot line as overall attrition rate 
+
+    plt.xticks(rotation = 45);    # rotate x-axis label ticks 45 degrees
+    
+    plt.grid(False)    # good-bye, gridlines
+
 
 #plot_categorical_and_continuous defines 3 parameters, a dataframe to pull data from, and x variable (categorical column) and a y variable (continuous value column), and returns visualizations of these relationships.
 def plot_categorical_and_continuous(df, x, y):
