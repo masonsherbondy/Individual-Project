@@ -25,6 +25,11 @@ from sklearn.metrics import confusion_matrix
 
 def tree_train_validate(X_train, y_train, X_validate, y_validate, tree_model, min_samples_leaf):
 
+    '''
+    This function takes in train, validate and test modeling sets, a decision tree or random forest classifier model, and a specified minimum number of samples
+    per leaf, and prints out train and validate accuracy results for 10 different depths and plots the validate accuracy results for different depths.
+    '''
+
     depth_range = range(1, 11)    # set a range of depths to explore
 
     scores = []    # set an empty list for validate scores
@@ -63,11 +68,11 @@ def tree_train_validate(X_train, y_train, X_validate, y_validate, tree_model, mi
 
     plt.title('Validate Accuracy')    # title
 
-    plt.show();
+    plt.show();     # show
 
     metrics_df = pd.DataFrame(metrics)    # form dataframe from scores data
 
-    metrics_df = metrics_df.set_index('max_depth')
+    metrics_df = metrics_df.set_index('max_depth')   # set index to max depth
 
     metrics_df['difference'] = metrics_df.train_accuracy - metrics_df.validate_accuracy   # create column of values
                                                                         # for difference between train and validate
@@ -79,13 +84,13 @@ def KNN_metrics(X_train, y_train, X_validate, y_validate, weights):
     scores = []
     metrics = []
     for k in k_range:
-        titan_knn = KNeighborsClassifier(n_neighbors = k, weights = weights)
-        titan_knn.fit(X_train, y_train)
+        knn = KNeighborsClassifier(n_neighbors = k, weights = weights)
+        knn.fit(X_train, y_train)
 
-        scores.append(titan_knn.score(X_validate, y_validate))
+        scores.append(knn.score(X_validate, y_validate))
 
-        in_sample_accuracy = titan_knn.score(X_train, y_train)
-        out_of_sample_accuracy = titan_knn.score(X_validate, y_validate)
+        in_sample_accuracy = knn.score(X_train, y_train)
+        out_of_sample_accuracy = knn.score(X_validate, y_validate)
         output = {
             'n_neighbors': k,
             'train_accuracy': in_sample_accuracy,
@@ -105,3 +110,4 @@ def KNN_metrics(X_train, y_train, X_validate, y_validate, weights):
     metrics_df = metrics_df.set_index('n_neighbors')
     metrics_df['difference'] = metrics_df.train_accuracy - metrics_df.validate_accuracy
     print(metrics_df)
+
